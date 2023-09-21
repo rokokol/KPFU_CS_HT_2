@@ -1,0 +1,7 @@
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\Tymakov3\Lab\TymakovLab3_2\obj\Debug\TymakovLab3_2.csproj.AssemblyReference.cache
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\Tymakov3\Lab\TymakovLab3_2\obj\Debug\TymakovLab3_2.csproj.CoreCompileInputs.cache
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\Tymakov3\Lab\TymakovLab3_2\bin\Debug\TymakovLab3_2.exe.config
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\Tymakov3\Lab\TymakovLab3_2\bin\Debug\TymakovLab3_2.exe
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\Tymakov3\Lab\TymakovLab3_2\bin\Debug\TymakovLab3_2.pdb
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\Tymakov3\Lab\TymakovLab3_2\obj\Debug\TymakovLab3_2.exe
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\Tymakov3\Lab\TymakovLab3_2\obj\Debug\TymakovLab3_2.pdb
