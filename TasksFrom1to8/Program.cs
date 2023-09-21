@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TasksFrom1to8
@@ -9,6 +10,7 @@ namespace TasksFrom1to8
     internal class Program
     {
         static int number = 1;
+        static Random RANDOM = new Random();
 
         static void Message(string message)
         {
@@ -16,9 +18,9 @@ namespace TasksFrom1to8
             Console.ReadKey();
         }
 
-        static double Round(double a)
+        static ConsoleColor RandomColor()
         {
-            return (Math.Round(a * 100)) / 100;
+            return (ConsoleColor)Enum.GetValues(typeof(ConsoleColor)).GetValue(Math.Abs((RANDOM.Next() * 10) % 16));
         }
 
         static void Error()
@@ -29,8 +31,9 @@ namespace TasksFrom1to8
         /**
         * Function read the input double and offers to user to try again if he was wrong
         * nonZero - input != 0; only positive - input must be >= 0
+        * maxValue - max value that user can input
         */
-        static double ReadDouble(bool onlyPositive, bool nonZero)
+        static double ReadDouble(bool onlyPositive, bool nonZero, double maxValue)
         {
             double result = 0;
             bool cond = true;
@@ -40,7 +43,7 @@ namespace TasksFrom1to8
                 bool onlyPositiveFlag = (onlyPositive && result >= 0) || !onlyPositive;
                 bool nonZeroFlag = (nonZero && result != 0) || !nonZero;
                 
-                if (onlyPositiveFlag && nonZeroFlag && convert)
+                if (onlyPositiveFlag && nonZeroFlag && convert && result < maxValue)
                 {
                     cond = false;
                 }
@@ -187,10 +190,76 @@ namespace TasksFrom1to8
                     substr, str, (str.Count() - (str.Replace(substr, "")).Count()) / substr.Count());
             }
 
+            void FifthProblem()
+            {
+                Message("count how many whisky bottles of duty-free trade you will" +
+                    "\nneed to buy to save compared to the usual average price actually cover the cost of your holiday");
+                Console.WriteLine("NOTE: you should not write sings like % or £ in the end of number\n" +
+                    "Please, enter the normal price of whisky (in £):");
+                double normPrice = ReadDouble(true, true, double.PositiveInfinity);
+                Console.WriteLine("Please write the discount (in %):");
+                double discount = ReadDouble(true, true, 100d);
+                Console.WriteLine("Please, enter holiday's price (in £):");
+                double holidayPrice = ReadDouble(true, true, double.PositiveInfinity);
+                double salePrice = (normPrice / 100d) * discount;
+                Console.WriteLine("The count bottles of whisky that you should buy to have a enough money is: {0}",
+                    (int)(holidayPrice / salePrice));
+            }
+
+            void SixthProblem()
+            {
+                Message("reproduces Harry Potter’s Conversation and Tom Reddle’s Diary");
+                Console.WriteLine("What's your name?");
+                Console.WriteLine($"Welcome, {ReadString()}!\n(You should ask: \"Do you know something about the secret room?\")");
+
+                //bool cond = true;
+                //while (cond)
+                //{
+                //    string input = ReadString();
+                //    if (input.Equals("Do you know something about the secret room?"))
+                //    {
+                //        cond = false;
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("I do not understand you. Couldn't you repeat, please?");
+                //    }
+                //}
+
+                //Console.WriteLine("Sure\n(You should ask: \"Might you tell me something about it?\")");
+                //cond = true;
+                //while (cond)
+                //{
+                //    string input = ReadString();
+                //    if (input.Equals("Might you tell me something about it?"))
+                //    {
+                //        cond = false;
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("I do not understand you. Couldn't you repeat, please?");
+                //    }
+                //}
+
+                Console.WriteLine("No.");
+                void Count(Object obj)
+                {
+                    Console.Write('.');
+                }
+                Timer timer = new Timer(Count, null, 1250, 1250);
+                Thread.Sleep(5000);
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
+                Console.BackgroundColor = RandomColor();
+                Console.Clear();
+                Console.WriteLine("But I can show it");
+            }
+
             //FirstProblem();
             //SecondProblem();
             //ThirdProblem();
-            FourthProblem();
+            //FourthProblem();
+            //FifthProblem();
+            SixthProblem();
             Console.WriteLine("That's all!\nPress any key to continue...");
             Console.ReadKey();
         }

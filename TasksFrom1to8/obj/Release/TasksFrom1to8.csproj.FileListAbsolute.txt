@@ -1,0 +1,7 @@
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\TasksFrom1to8\bin\Release\TasksFrom1to8.exe.config
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\TasksFrom1to8\bin\Release\TasksFrom1to8.exe
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\TasksFrom1to8\bin\Release\TasksFrom1to8.pdb
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\TasksFrom1to8\obj\Release\TasksFrom1to8.csproj.AssemblyReference.cache
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\TasksFrom1to8\obj\Release\TasksFrom1to8.csproj.CoreCompileInputs.cache
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\TasksFrom1to8\obj\Release\TasksFrom1to8.exe
+C:\Users\Rokoko\Source\Repos\KPFU_CS_HT_2\TasksFrom1to8\obj\Release\TasksFrom1to8.pdb

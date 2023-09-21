@@ -12,8 +12,7 @@ namespace TymakovLab2
         {
             Console.WriteLine("This app asks your name and then welcome you");
             Console.WriteLine("Enter your name:");
-            string name = Console.ReadLine();
-            Console.WriteLine($"Welcome, dear {name}!");
+            Console.WriteLine($"Welcome, dear {Console.ReadLine()}!");
             Console.WriteLine("Please, press any key to continue...");
             Console.ReadKey();
         }
