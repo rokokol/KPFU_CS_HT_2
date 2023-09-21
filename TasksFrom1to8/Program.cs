@@ -149,6 +149,24 @@ namespace TasksFrom1to8
             }
         }
 
+        enum AlcoholismCategory
+        {
+            a,
+            b,
+            c,
+            d
+        }
+
+        struct Student
+        {
+            public string secondName;
+            public string name;
+            public string id;
+            public DateTime birthday;
+            public AlcoholismCategory ac;
+            public double hadAlcoholValue;
+        }
+
         // Solutions run
         static void Main(string[] args)
         {
@@ -335,9 +353,9 @@ namespace TasksFrom1to8
 
             void SeventhProblem()
             {
-                string MASK = "The control sum of {0} is: {1}\n";
                 Message("first calculates control sum of random barcode, then calculates control sum of input barcode");
 
+                string MASK = "The control sum of {0} is: {1}\n";
                 StringBuilder randBarcode = new StringBuilder();
                 for (int i = 0; i < 13; i++)
                 {
@@ -351,7 +369,63 @@ namespace TasksFrom1to8
 
             void EigthProblem()
             {
+                Message("creates five stydents, prints common per cent" +
+                    " drunk alcohol and give its statistic about the students");
 
+                Student[] studs = new Student[5];
+
+                studs[0] = new Student();
+                studs[0].secondName = "Ometichev";
+                studs[0].name = "Oleg";
+                studs[0].id = "01";
+                studs[0].birthday = new DateTime(2005, 7, 20);
+                studs[0].ac = AlcoholismCategory.a;
+                studs[0].hadAlcoholValue = 7;
+
+                studs[1] = new Student();
+                studs[1].secondName = "Torskiy";
+                studs[1].name = "Artem";
+                studs[1].id = "02";
+                studs[1].birthday = new DateTime(2002, 3, 30);
+                studs[1].ac = AlcoholismCategory.b;
+                studs[1].hadAlcoholValue = 4.5;
+
+                studs[2] = new Student();
+                studs[2].secondName = "Vasiliev";
+                studs[2].name = "Ivan";
+                studs[2].id = "03";
+                studs[2].birthday = new DateTime(2004, 5, 26);
+                studs[2].ac = AlcoholismCategory.c;
+                studs[2].hadAlcoholValue = 1;
+
+                studs[3] = new Student();
+                studs[3].secondName = "Kiric";
+                studs[3].name = "Vitaliy";
+                studs[3].id = "04";
+                studs[3].birthday = new DateTime(2001, 2, 2);
+                studs[3].ac = AlcoholismCategory.d;
+                studs[3].hadAlcoholValue = 0;
+
+                studs[4] = new Student();
+                studs[4].secondName = "Pavlov";
+                studs[4].name = "Pavel";
+                studs[4].id = "05";
+                studs[4].birthday = new DateTime(2005, 12, 1);
+                studs[4].ac = AlcoholismCategory.d;
+                studs[4].hadAlcoholValue = 0;
+
+                double totalSum = 0;
+                foreach (Student st in studs)
+                {
+                    totalSum += st.hadAlcoholValue;
+                }
+
+                Console.WriteLine($"Total count of drunk alcohol is: {totalSum}\n");
+                foreach (Student st in studs)
+                {
+                    Console.WriteLine("{0} has drunk {1} % of total alcohol value",
+                        st.name, st.hadAlcoholValue / (totalSum / 100d));
+                }
             }
 
             FirstProblem();
@@ -362,7 +436,8 @@ namespace TasksFrom1to8
             SixthProblem();
             SeventhProblem();
             EigthProblem();
-            Console.WriteLine("That's all!\nPress any key to continue...");
+
+            Console.WriteLine("\nThat's all!\nPress any key to continue...");
             Console.ReadKey();
         }
     }
