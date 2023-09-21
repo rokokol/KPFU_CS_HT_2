@@ -360,7 +360,7 @@ namespace TasksFrom1to8
             FourthProblem();
             FifthProblem();
             SixthProblem();
-            //SeventhProblem();
+            SeventhProblem();
             EigthProblem();
             Console.WriteLine("That's all!\nPress any key to continue...");
             Console.ReadKey();
