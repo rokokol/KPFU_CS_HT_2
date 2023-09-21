@@ -94,17 +94,33 @@ namespace TasksFrom1to8
 
         /**
          * Read string which length must be lesser or equal than maxLength and bigger or equals than minSize
-         * if minSize < 0, it may be any number
-         * if maxSize < 0, it may be any number
+         * if minLength < 0, it may be any number
+         * if maxLength < 0, it may be any number
+         * nonDigit - cannot contains ant digits
          */
-        static string ReadString(int MinSize, int maxLength)
+        static string ReadString(int minLength, int maxLength, bool nonDigit)
         {
             string input = "";
             bool cont = true;
+            bool nonDigitFlag = true;
             while (cont)
             {
                 input = Console.ReadLine();
-                if ((maxLength < 0 || input.Length >= maxLength) && (maxLength < 0 || input.Length <= maxLength))
+
+                if (nonDigit)
+                {
+                    foreach (char ch in input)
+                    {
+                        if (ch < '9' && ch > '0')
+                        {
+                            nonDigitFlag = false;
+                            continue;
+                        }
+                    }
+                }
+
+                if ((minLength < 0 || input.Length >= minLength) && (maxLength < 0 || input.Length <= maxLength) && 
+                    nonDigitFlag)
                 {
                     cont = false;
                 }
@@ -118,7 +134,7 @@ namespace TasksFrom1to8
 
         static string ReadString()
         {
-            return ReadString(1,    -1);
+            return ReadString(1, -1, false);
         }
 
         struct User
@@ -164,11 +180,11 @@ namespace TasksFrom1to8
 
                 User user = new User();
                 Console.WriteLine("Please, enter the user's name:");
-                user.name = Console.ReadLine();
+                user.name = ReadString();
                 Console.WriteLine("Please, enter the user's age:");
                 user.age = ReadInt();
                 Console.WriteLine("Please, enter the user's city:");
-                user.city = Console.ReadLine();
+                user.city = ReadString(1, -1, true);
                 Console.WriteLine("Please, enter the user's PIN:");
                 user.pin = ReadInt();
                 user.ToString();
@@ -244,7 +260,8 @@ namespace TasksFrom1to8
                 Message("reproduces Harry Potter’s Conversation and Tom Reddle’s Diary");
 
                 Console.WriteLine("What's your name?");
-                Console.WriteLine($"Welcome, {ReadString()}!\n(You should ask: \"Do you know something about the secret room?\")");
+                Console.WriteLine($"Welcome, {ReadString(1, -1, true)}!" +
+                    $"\n(You should ask: \"Do you know something about the secret room?\")");
 
                 bool cond = true;
                 while (cond)
@@ -285,14 +302,17 @@ namespace TasksFrom1to8
                 timer.Change(Timeout.Infinite, Timeout.Infinite);
                 Console.BackgroundColor = RandomColor();
                 Console.Clear();
-                Console.WriteLine("But I can show it");
+                Console.WriteLine("But I can show it\nPress any key to continue...");
+                Console.WriteLine();
+                Console.ReadKey();
                 Console.ResetColor();
+                Console.Clear();
             }
 
             void SeventhProblem()
             {
                 string MASK = "The control sum of {0} is: {1}\n";
-                Message("first calculates control sun of random barcode, then calculates control sum of input barcode");
+                Message("first calculates control sum of random barcode, then calculates control sum of input barcode");
 
                 StringBuilder randBarcode = new StringBuilder();
                 for (int i = 0; i < 13; i++)
@@ -301,8 +321,13 @@ namespace TasksFrom1to8
                 }
                 Console.WriteLine(MASK, randBarcode, CalculateBarcodeSum(randBarcode.ToString()));
                 Console.WriteLine("NOTE: barcode is a string that consist of 12 digits\nPlease, enter the barcode:");
-                string barcode = ReadString(12, 12);
+                string barcode = ReadString(12, 12, false);
                 Console.WriteLine(MASK, barcode, CalculateBarcodeSum(barcode));
+            }
+
+            void EigthProblem()
+            {
+
             }
 
             FirstProblem();
@@ -312,6 +337,7 @@ namespace TasksFrom1to8
             FifthProblem();
             SixthProblem();
             SeventhProblem();
+            EigthProblem();
             Console.WriteLine("That's all!\nPress any key to continue...");
             Console.ReadKey();
         }
