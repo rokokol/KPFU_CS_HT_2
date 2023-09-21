@@ -18,9 +18,27 @@ namespace TasksFrom1to8
             Console.ReadKey();
         }
 
+        static int CalculateBarcodeSum(string barcode)
+        {
+            int oddSum = 0;
+            int evenSum = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                if (i % 2 == 1)
+                {
+                    oddSum += int.Parse(barcode[i].ToString());
+                }
+                else
+                {
+                    evenSum += int.Parse(barcode[i].ToString());
+                }
+            }
+            return (10 - ((3 * oddSum + evenSum) % 10)) % 10;
+        }
+
         static ConsoleColor RandomColor()
         {
-            return (ConsoleColor)Enum.GetValues(typeof(ConsoleColor)).GetValue(Math.Abs((RANDOM.Next() * 10) % 16));
+            return (ConsoleColor)Enum.GetValues(typeof(ConsoleColor)).GetValue(RANDOM.Next() % 16);
         }
 
         static void Error()
@@ -40,8 +58,8 @@ namespace TasksFrom1to8
             while (cond)
             {
                 bool convert = double.TryParse(Console.ReadLine().Replace(",", "."), out result);
-                bool onlyPositiveFlag = (onlyPositive && result >= 0) || !onlyPositive;
-                bool nonZeroFlag = (nonZero && result != 0) || !nonZero;
+                bool onlyPositiveFlag = result >= 0 || !onlyPositive;
+                bool nonZeroFlag = result != 0 || !nonZero;
                 
                 if (onlyPositiveFlag && nonZeroFlag && convert && result < maxValue)
                 {
@@ -55,7 +73,6 @@ namespace TasksFrom1to8
             return result;
         }
 
-        // Function read the input int and offers to user to try again if he was wrong
         static int ReadInt()
         {
             int result = 0;
@@ -74,15 +91,20 @@ namespace TasksFrom1to8
             }
             return result;
         }
-        // Read string which must not equals 0
-        static string ReadString()
+
+        /**
+         * Read string which length must be lesser or equal than maxLength and bigger or equals than minSize
+         * if minSize < 0, it may be any number
+         * if maxSize < 0, it may be any number
+         */
+        static string ReadString(int MinSize, int maxLength)
         {
             string input = "";
             bool cont = true;
             while (cont)
             {
                 input = Console.ReadLine();
-                if (!input.Equals(""))
+                if ((maxLength < 0 || input.Length >= maxLength) && (maxLength < 0 || input.Length <= maxLength))
                 {
                     cont = false;
                 }
@@ -93,6 +115,12 @@ namespace TasksFrom1to8
             }
             return input;
         }
+
+        static string ReadString()
+        {
+            return ReadString(1,    -1);
+        }
+
         struct User
         {
             public string name;
@@ -111,6 +139,7 @@ namespace TasksFrom1to8
             void FirstProblem()
             {
                 Message("prints min and max value of each C# data type");
+
                 string MASK = "+================================================================================+\n" +
                     "|{0}| --> | {1} <-> {2} |";
                 Console.WriteLine(MASK, "bool", bool.FalseString, bool.TrueString);
@@ -132,6 +161,7 @@ namespace TasksFrom1to8
             void SecondProblem()
             {
                 Message("asks you to fill user's profile and then print it");
+
                 User user = new User();
                 Console.WriteLine("Please, enter the user's name:");
                 user.name = Console.ReadLine();
@@ -147,6 +177,7 @@ namespace TasksFrom1to8
             void ThirdProblem()
             {
                 Message("replaces each uppercase word in input string to lowercase one and vise versa");
+
                 int stepEng = 'a' - 'A'; // English letters
                 int stepRus = 'а' - 'А'; // Russian letters
                 Console.WriteLine("NOTE: program supports English and Russian alphabets only!\nPlease, enter the string:");
@@ -182,6 +213,7 @@ namespace TasksFrom1to8
             void FourthProblem()
             {
                 Message("counts a number of substrings in the input");
+
                 Console.WriteLine("NOTE: length of substring must not equals 0!\nPlease, enter the string:");
                 string str = Console.ReadLine();
                 Console.WriteLine("Please, enter the substring:");
@@ -194,6 +226,7 @@ namespace TasksFrom1to8
             {
                 Message("count how many whisky bottles of duty-free trade you will" +
                     "\nneed to buy to save compared to the usual average price actually cover the cost of your holiday");
+
                 Console.WriteLine("NOTE: you should not write sings like % or £ in the end of number\n" +
                     "Please, enter the normal price of whisky (in £):");
                 double normPrice = ReadDouble(true, true, double.PositiveInfinity);
@@ -209,37 +242,38 @@ namespace TasksFrom1to8
             void SixthProblem()
             {
                 Message("reproduces Harry Potter’s Conversation and Tom Reddle’s Diary");
+
                 Console.WriteLine("What's your name?");
                 Console.WriteLine($"Welcome, {ReadString()}!\n(You should ask: \"Do you know something about the secret room?\")");
 
-                //bool cond = true;
-                //while (cond)
-                //{
-                //    string input = ReadString();
-                //    if (input.Equals("Do you know something about the secret room?"))
-                //    {
-                //        cond = false;
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine("I do not understand you. Couldn't you repeat, please?");
-                //    }
-                //}
+                bool cond = true;
+                while (cond)
+                {
+                    string input = ReadString();
+                    if (input.Equals("Do you know something about the secret room?"))
+                    {
+                        cond = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("I do not understand you. Couldn't you repeat, please?");
+                    }
+                }
 
-                //Console.WriteLine("Sure\n(You should ask: \"Might you tell me something about it?\")");
-                //cond = true;
-                //while (cond)
-                //{
-                //    string input = ReadString();
-                //    if (input.Equals("Might you tell me something about it?"))
-                //    {
-                //        cond = false;
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine("I do not understand you. Couldn't you repeat, please?");
-                //    }
-                //}
+                Console.WriteLine("Sure\n(You should ask: \"Might you tell me something about it?\")");
+                cond = true;
+                while (cond)
+                {
+                    string input = ReadString();
+                    if (input.Equals("Might you tell me something about it?"))
+                    {
+                        cond = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("I do not understand you. Couldn't you repeat, please?");
+                    }
+                }
 
                 Console.WriteLine("No.");
                 void Count(Object obj)
@@ -252,14 +286,32 @@ namespace TasksFrom1to8
                 Console.BackgroundColor = RandomColor();
                 Console.Clear();
                 Console.WriteLine("But I can show it");
+                Console.ResetColor();
             }
 
-            //FirstProblem();
-            //SecondProblem();
-            //ThirdProblem();
-            //FourthProblem();
-            //FifthProblem();
+            void SeventhProblem()
+            {
+                string MASK = "The control sum of {0} is: {1}\n";
+                Message("first calculates control sun of random barcode, then calculates control sum of input barcode");
+
+                StringBuilder randBarcode = new StringBuilder();
+                for (int i = 0; i < 13; i++)
+                {
+                    randBarcode.Append((RANDOM.Next() % 10).ToString());
+                }
+                Console.WriteLine(MASK, randBarcode, CalculateBarcodeSum(randBarcode.ToString()));
+                Console.WriteLine("NOTE: barcode is a string that consist of 12 digits\nPlease, enter the barcode:");
+                string barcode = ReadString(12, 12);
+                Console.WriteLine(MASK, barcode, CalculateBarcodeSum(barcode));
+            }
+
+            FirstProblem();
+            SecondProblem();
+            ThirdProblem();
+            FourthProblem();
+            FifthProblem();
             SixthProblem();
+            SeventhProblem();
             Console.WriteLine("That's all!\nPress any key to continue...");
             Console.ReadKey();
         }
