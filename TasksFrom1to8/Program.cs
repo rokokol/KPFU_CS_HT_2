@@ -102,10 +102,10 @@ namespace TasksFrom1to8
         {
             string input = "";
             bool cont = true;
-            bool nonDigitFlag = true;
             while (cont)
             {
                 input = Console.ReadLine();
+                bool nonDigitFlag = true;
 
                 if (nonDigit)
                 {
@@ -259,11 +259,35 @@ namespace TasksFrom1to8
             {
                 Message("reproduces Harry Potter’s Conversation and Tom Reddle’s Diary");
 
-                Console.WriteLine("What's your name?");
-                Console.WriteLine($"Welcome, {ReadString(1, -1, true)}!" +
+                Console.WriteLine("What's your name?\n(your name cannot contain any digits)");
+                bool cond = true;
+                string name = "";
+                while (cond)
+                {
+                    name = Console.ReadLine();
+                    bool nonDigit = true;
+                    foreach (char ch in name)
+                    {
+                        if (ch < '9' && ch > '0')
+                        {
+                            nonDigit = false;
+                            continue;
+                        }
+                    }
+
+                    if (name.Length > 0 && nonDigit)
+                    {
+                        cond = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Tell me your real name!");
+                    }
+                }
+                Console.WriteLine($"Welcome, {name}!" +
                     $"\n(You should ask: \"Do you know something about the secret room?\")");
 
-                bool cond = true;
+                cond = true;
                 while (cond)
                 {
                     string input = ReadString();
@@ -336,7 +360,7 @@ namespace TasksFrom1to8
             FourthProblem();
             FifthProblem();
             SixthProblem();
-            SeventhProblem();
+            //SeventhProblem();
             EigthProblem();
             Console.WriteLine("That's all!\nPress any key to continue...");
             Console.ReadKey();
